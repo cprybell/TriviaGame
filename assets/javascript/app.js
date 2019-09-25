@@ -70,4 +70,10 @@ function QuestionObject(question, answers, answer) {
       createQuestionHTML(questions[que]);
   }
 
-  //$(".inlineRadioOptions0").attr('disabled', true);
+  $(".form-check-input").on("click", recordLap);
+
+  function recordLap(event) {
+      console.log(this.value);
+      $("." + this.name).attr('disabled', true);
+  }
+  
