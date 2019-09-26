@@ -1,0 +1,53 @@
+#title {
+    font-size: 2.5em;
+    background: #05b91d;
+    text-align: center;
+    padding: 1.5em;
+    color: #030303;
+    font-weight: 800;
+}
+
+body {
+    background-image: url("../images/athletes-audience-ball-270085.jpg");
+}
+
+.questionText {
+    text-align: center;
+    padding: 1.5em;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.timer {
+    text-align: center;
+    padding: 1.5em;
+    font-size: 1.5em;
+    font-weight: 500;
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: white;
+    z-index: 1;
+}
+
+#gameSpace {
+    background: #05b91d;
+}
+
+.form-check-label {
+    padding-right: 1em;
+}
+
+.gameScore {
+    position: fixed;
+    bottom: 27%;
+    left: 27%;
+    background-image: url("../images/football-game-3046616_1280.jpg");
+    padding: 6.0em;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+    z-index: 1;
+    color: white;
+    opacity: 0;
+}

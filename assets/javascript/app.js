@@ -17,17 +17,15 @@ function countDown() {
 intervalId = setInterval(countDown, 1000);
 
 function gameOver() {
-    console.log('You Got ' + correctAnswers + ' Correct!');
-    console.log('You Got ' + incorrectAnswers + ' Incorrect!');
-    console.log('You Got ' + Math.round((correctAnswers/totalQuestions) * 100) + '% of answered questions correct');
     $("#correct").text('You Got ' + correctAnswers + ' Correct!');
     $("#incorrect").text('You Got ' + incorrectAnswers + ' Incorrect!');
-    if (totalQuestions === 0) {
+    if (totalQuestions != 0) {
         $("#percentage").text('You Got ' + Math.round((correctAnswers/totalQuestions) * 100) + '% of answered questions correct');
     }
     else {
         $("#percentage").text('You did not answer any questions!');
     }
+    $(".gameScore").fadeTo(1,1);
 }
 
 function QuestionObject(question, answers, answer) {
@@ -54,11 +52,9 @@ function QuestionObject(question, answers, answer) {
       questionFifteen : new QuestionObject("Who won the European Golden Boot in 2007?", ['Francesco Totti', 'Cristiano Ronaldo', 'Zinedine Zidane', 'Lionel Messi'], "Francesco Totti"),
     }
 
-  console.log(questions.questionOne);
-  console.log(questions.length);
-
   function createQuestionHTML(objectQuestion) {
     var newQuestionDiv = $("<div>");
+    newQuestionDiv.addClass("questionText");
     var triviaDiv = $("<div>");
     triviaDiv.text(objectQuestion.questionString);
     newQuestionDiv.append(triviaDiv);
