@@ -1,14 +1,14 @@
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var totalQuestions = 0;
-var timeLeft = 10;
+var timeLeft = 100;
 var intervalId;
 var answerStackCounter = 0;
 
 function countDown() {
     timeLeft -= 1;
     $(".timer").text("Time Remaining: " + timeLeft);
-    if(timeLeft == 0) {
+    if(timeLeft == 0 || totalQuestions === answerStackCounter) {
         clearInterval(intervalId);
         gameOver();
     }
@@ -20,6 +20,14 @@ function gameOver() {
     console.log('You Got ' + correctAnswers + ' Correct!');
     console.log('You Got ' + incorrectAnswers + ' Incorrect!');
     console.log('You Got ' + Math.round((correctAnswers/totalQuestions) * 100) + '% of answered questions correct');
+    $("#correct").text('You Got ' + correctAnswers + ' Correct!');
+    $("#incorrect").text('You Got ' + incorrectAnswers + ' Incorrect!');
+    if (totalQuestions === 0) {
+        $("#percentage").text('You Got ' + Math.round((correctAnswers/totalQuestions) * 100) + '% of answered questions correct');
+    }
+    else {
+        $("#percentage").text('You did not answer any questions!');
+    }
 }
 
 function QuestionObject(question, answers, answer) {
@@ -34,7 +42,17 @@ function QuestionObject(question, answers, answer) {
       questionThree : new QuestionObject("Who won the Cy Young award in 2008?", ['Cliff Lee', 'Justin Verlander', 'C.C. Sabathia', 'Tim Lincecum'], "Cliff Lee"),
       questionFour : new QuestionObject("Who lead the NBA in scoring in 2013?", ['Lebron James', 'Kobe Bryant', 'Dwayne Wade', 'Kevin Durant'], "Kevin Durant"),
       questionFive : new QuestionObject("What team won the Stanley Cup in 2010?", ['Pittsburg Penguins', 'Detriot Redwings', 'Chicago Blackhawks', 'Boston Bruins'], "Chicago Blackhawks"),
-  }
+      questionSix : new QuestionObject("Who led the NFL in rushing in 1997?", ['Emmit Smith', 'Barry Sanders', 'Terelle Davis', 'The Rock'], "Barry Sanders"),
+      questionSeven : new QuestionObject("Who led the MLB in homeruns in the year 2017?", ['Aaron Judge', 'Bryce Harper', 'Mike Trout', 'Giancarlo Stanton'], "Giancarlo Stanton"),
+      questionEight : new QuestionObject("How many Preimer League Trophies have Liverpool FC won?", ['0', '2', '3', '6'], "0"),
+      questionNine : new QuestionObject("Who won the world cup in 2010?", ['Spain', 'Germany', 'France', 'Netherlands'], "Spain"),
+      questionTen : new QuestionObject("Who many championships did Michael Jordan win?", ['3', '4', '5', '6'], "6"),
+      questionEleven : new QuestionObject("Who won the world cup in 2010?", ['Spain', 'Germany', 'France', 'Netherlands'], "Spain"),
+      questionTwelve : new QuestionObject("Who won the AL MLB MVP award in 2005?", ['Albert Pujols', 'Alex Rodriguez', 'Derek Jeter', 'Barry Bonds'], "Alex Rodriguez"),
+      questionThirteen : new QuestionObject("Who won the NFL MVP award in 2018?", ['Tom Brady', 'Russel Wilson', 'Patrick Mahomes', 'Carson Wentz'], "Patrick Mahomes"),
+      questionFourteen : new QuestionObject("Who is the youngest MVP in NBA history?", ['Lebron James', 'Michael Jordan', 'Kobe Bryant', 'Derrick Rose'], "Derrick Rose"),
+      questionFifteen : new QuestionObject("Who won the European Golden Boot in 2007?", ['Francesco Totti', 'Cristiano Ronaldo', 'Zinedine Zidane', 'Lionel Messi'], "Francesco Totti"),
+    }
 
   console.log(questions.questionOne);
   console.log(questions.length);
@@ -62,7 +80,6 @@ function QuestionObject(question, answers, answer) {
       tempInput.attr('name','inlineRadioOptions' + answerStackCounter);
       tempInput.attr('id', value);
       tempInput.attr('value', answer);
-      //tempInput.attr('answer', answer);
       var tempLabel = $("<label>");
       tempLabel.addClass("form-check-label");
       tempLabel.attr('for', "inlineRadio" + count);
@@ -79,8 +96,6 @@ function QuestionObject(question, answers, answer) {
   $(".form-check-input").on("click", gradeAnswer);
 
   function gradeAnswer(event) {
-      console.log(this.value);
-      console.log(this.id);
       if (this.value === this.id) {
         correctAnswers++;
         totalQuestions++;
@@ -89,9 +104,7 @@ function QuestionObject(question, answers, answer) {
           incorrectAnswers++;
           totalQuestions++;
       }
-      console.log(correctAnswers);
-      console.log(incorrectAnswers);
-      console.log(totalQuestions);
+
       $("." + this.name).attr('disabled', true);
   }
   
